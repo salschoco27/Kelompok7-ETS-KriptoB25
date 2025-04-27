@@ -92,4 +92,21 @@ Fungsi ini digunakan untuk mengganti nibble setiap byte dalam blok data, untuk m
 
 cuplikan code dalam `mini_aes.py`
 
-![alt text](image-1.png)
+![alt text](image.png)
+
+### ShiftRows
+
+Fungsi `shift_rows` menggeser posisi nibble dalam blok data untuk meningkatkan kekacauan data. Operasi ini menggeser nilai pada baris pertama, kedua, dan seterusnya untuk membuat data lebih kompleks.
+
+ShiftRows pada Mini-AES 16-bit hanya menukar nibble tertentu pada blok. Misalnya, pada blok 4-byte:
+
+    - Sebelum shift :
+    
+    `[n0 n1]`
+    `[n2 n3]`
+
+    - Setelah shift : 
+
+    `[n0 n1]`
+    `[n3 n2]`
+
