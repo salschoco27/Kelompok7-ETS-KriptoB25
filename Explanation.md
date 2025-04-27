@@ -92,7 +92,11 @@ Fungsi ini digunakan untuk mengganti nibble setiap byte dalam blok data, untuk m
 
 cuplikan code dalam `mini_aes.py`
 
-![alt text](image.png)
+```def sub_nibbles(block):
+    return ((SBOX[(block >> 12) & 0xF] << 12) |
+            (SBOX[(block >> 8) & 0xF] << 8) |
+            (SBOX[(block >> 4) & 0xF] << 4) |
+            (SBOX[block & 0xF]))```
 
 ### ShiftRows
 
