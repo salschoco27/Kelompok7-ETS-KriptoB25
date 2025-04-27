@@ -16,51 +16,51 @@ Mini-AES 16-bit Encryption adalah implementasi algoritma AES versi mini yang men
 
 1. Enkripsi/dekripsi Mini-AES 16-bit (ECB & CBC)
 
-Enkripsi dan dekripsi data menggunakan algoritma Mini-AES 16-bit yang mengolah blok dan kunci sebesar 16-bit.
+    Enkripsi dan dekripsi data menggunakan algoritma Mini-AES 16-bit yang mengolah blok dan kunci sebesar 16-bit.
 
-- Tersedia dalam dua mode operasi:
+    - Tersedia dalam dua mode operasi:
 
-    - ECB (Electronic Codebook)
+        - ECB (Electronic Codebook)
 
-    - CBC (Cipher Block Chaining)
+        - CBC (Cipher Block Chaining)
 
 2. Operasi SubNibbles, ShiftRows, MixColumns, dan AddRoundKey
 
-- SubNibbles: Penggantian 4-bit menggunakan S-Box.
+    - SubNibbles: Penggantian 4-bit menggunakan S-Box.
 
-- ShiftRows: Penggeseran posisi nibble di blok.
+    - ShiftRows: Penggeseran posisi nibble di blok.
 
-- MixColumns: Operasi pencampuran kolom menggunakan GF(2⁴).
+    - MixColumns: Operasi pencampuran kolom menggunakan GF(2⁴).
 
-- AddRoundKey: XOR antara blok dan kunci setiap round.
+    - AddRoundKey: XOR antara blok dan kunci setiap round.
 
 3. Key Expansion untuk round keys
 
-Ekspansi kunci untuk menghasilkan 3 round-keys yang digunakan selama proses enkripsi dan dekripsi.
+    Ekspansi kunci untuk menghasilkan 3 round-keys yang digunakan selama proses enkripsi dan dekripsi.
 
 4. Avalanche Effect Test
 
-Menguji efek perubahan bit pada ciphertext dengan memodifikasi satu bit pada plaintext dan mengukur jumlah perubahan bit.
+    Menguji efek perubahan bit pada ciphertext dengan memodifikasi satu bit pada plaintext dan mengukur jumlah perubahan bit.
 
 5. File Operations (upload, encrypt, decrypt .txt)
 
-- Mengunggah file .txt, mengenkripsi, dan mendekripsi data menggunakan kunci dan mode yang dipilih.
+    - Mengunggah file .txt, mengenkripsi, dan mendekripsi data menggunakan kunci dan mode yang dipilih.
 
-- Menyimpan ciphertext dan hasil dekripsi ke dalam file output.
+    - Menyimpan ciphertext dan hasil dekripsi ke dalam file output.
 
 6. Input/output dalam format hexadecimal
 
-Program menerima input dalam format hexadecimal 16-bit dan memberikan output dalam format yang sama untuk ciphertext dan hasil dekripsi.
+    Program menerima input dalam format hexadecimal 16-bit dan memberikan output dalam format yang sama untuk ciphertext dan hasil dekripsi.
 
 7. Streamlit GUI dengan tiga menu (Encrypt/Decrypt, Avalanche Effect, File Operations)
 
-- Antarmuka pengguna menggunakan Streamlit untuk melakukan operasi enkripsi/dekripsi dan tes avalanche secara interaktif.
+    - Antarmuka pengguna menggunakan Streamlit untuk melakukan operasi enkripsi/dekripsi dan tes avalanche secara interaktif.
 
-- Pengguna dapat memilih mode operasi (ECB atau CBC), mengupload file, dan melihat hasil enkripsi/dekripsi.
+    - Pengguna dapat memilih mode operasi (ECB atau CBC), mengupload file, dan melihat hasil enkripsi/dekripsi.
 
 8. State Management untuk menyimpan hasil enkripsi/dekripsi
 
-Menggunakan st.session_state untuk menyimpan hasil ciphertext dan konfigurasi enkripsi, sehingga pengguna dapat melanjutkan dekripsi tanpa perlu menginput ulang data.
+    Menggunakan st.session_state untuk menyimpan hasil ciphertext dan konfigurasi enkripsi, sehingga pengguna dapat melanjutkan dekripsi tanpa perlu menginput ulang data.
 
 ## Penjelasan dan Dokumentasi
 
