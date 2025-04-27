@@ -90,7 +90,7 @@ Fungsi `sub_nibbles` menggantikan setiap nibble (4-bit) pada blok data menggunak
 
 Fungsi ini digunakan untuk mengganti nibble setiap byte dalam blok data, untuk menciptakan lebih banyak kekacauan (confusion) dalam proses enkripsi.
 
-cuplikan code dalam `mini_aes.py`
+cuplikan kode : 
 
 ```def sub_nibbles(block):
     return ((SBOX[(block >> 12) & 0xF] << 12) |
@@ -115,3 +115,60 @@ ShiftRows pada Mini-AES 16-bit hanya menukar nibble tertentu pada blok. Misalnya
     `[n0 n1]`
     `[n3 n2]`
 
+### MixColumns
+
+    Fungsi mix_columns mencampur data dalam kolom-kolom blok menggunakan operasi GF(2⁴). Operasi ini berfungsi untuk lebih mengacak data dan menyebarkan bit ke seluruh blok.
+
+    Mixing dilakukan antara nibble 1 dengan 3 dan nibble 2 dengan 4, untuk menghasilkan ciphertext yang lebih kompleks.
+
+    Cuplikan kode : 
+
+    ```
+    def mix_columns(block):
+    n0 = (block >> 12) & 0xF
+    n1 = (block >> 8) & 0xF
+    n2 = (block >> 4) & 0xF
+    n3 = block & 0xF
+
+    m0 = gf_mult(n0, 1) ^ gf_mult(n2, 4)
+    m1 = gf_mult(n0, 4) ^ gf_mult(n2, 1)
+    m2 = gf_mult(n1, 1) ^ gf_mult(n3, 4)
+    m3 = gf_mult(n1, 4) ^ gf_mult(n3, 1)
+
+    return (m0 << 12) | (m1 << 8) | (m2 << 4) | m3
+    ```
+
+    ### AddRoundKey
+
+    Fungsi `add_round_key` melakukan operasi XOR antara blok data dan round key. Setiap blok data akan XOR dengan kunci yang berbeda setiap ronde untuk meningkatkan keamanan.
+
+    Cuplikan kode : 
+
+    ```
+    def add_round_key(block, key):
+    return block ^ key
+    ```
+
+### Key Expansion
+
+Fungsi `key_expansion` digunakan untuk menghasilkan round keys dari kunci utama. Kunci utama 16-bit akan diperluas menjadi tiga kunci untuk digunakan di tiga ronde enkripsi.
+
+Cuplikan kode : 
+
+```
+def key_expansion(key):
+    w = [0] * 6
+    w[0] = (key >> 8) & 0xFF
+    w[1] = key & 0xFF
+    w[2] = w[0] ^ 0b10000000 ^ ((SBOX[w[1] >> 4] << 4) | SBOX[w[1] & 0x0F])
+    w[3] = w[2] ^ w[1]
+    w[4] = w[2] ^ 0b00110000 ^ ((SBOX[w[3] >> 4] << 4) | SBOX[w[3] & 0x0F])
+    w[5] = w[4] ^ w[3]
+
+    round_keys = [
+        (w[0] << 8) | w[1],
+        (w[2] << 8) | w[3],
+        (w[4] << 8) | w[5],
+    ]
+    return round_keys
+```
