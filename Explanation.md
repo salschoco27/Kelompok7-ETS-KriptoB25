@@ -358,5 +358,6 @@ else:
 save_to_file("decrypted_output.txt", decrypted_blocks)
 ```
 
-Flowchart untuk operation filenya
+*(flowchart untuk operation filenya)*
+
 ![alt text](/image/flowchart%20operation%20file.png)
