@@ -1,4 +1,3 @@
-# gui.py
 import streamlit as st
 from mini_aes import (
     mini_aes_encrypt, mini_aes_decrypt,
@@ -15,6 +14,7 @@ def to_hex_if_needed(s):
         return s.encode('utf-8').hex()
 
 def hex_to_text_safe(hex_str):
+    """Coba konversi hex ke teks utf-8, kalau gagal return None."""
     try:
         return bytes.fromhex(hex_str).decode('utf-8')
     except Exception:
@@ -27,10 +27,10 @@ menu = st.sidebar.selectbox("Menu", ["Encrypt/Decrypt", "Avalanche Effect Test",
 if menu == "Encrypt/Decrypt":
     st.header("Mini AES Encrypt / Decrypt")
 
-    plaintext_input = st.text_input("Plaintext (Hex 16-bit)").strip()
-    key_input = st.text_input("Key (Hex 16-bit)").strip()
+    plaintext_input = st.text_input("Plaintext (Teks biasa atau Hex)").strip()
+    key_input = st.text_input("Key (Teks biasa atau Hex)").strip()
     mode = st.selectbox("Mode Operasi", ["ECB", "CBC"])
-    iv_input = st.text_input("Initialization Vector (IV) untuk CBC (hex)", value="0000").strip()
+    iv_input = st.text_input("Initialization Vector (IV) untuk CBC", value="0000").strip()
 
     if st.button("Encrypt"):
         try:
@@ -82,8 +82,8 @@ if menu == "Encrypt/Decrypt":
 elif menu == "Avalanche Effect Test":
     st.header("Avalanche Effect Test")
 
-    plaintext_input = st.text_input("Plaintext (Hex 16-bit)", key="plaintext_avalanche").strip()
-    key_input = st.text_input("Key (Hex 16-bit)", key="key_avalanche").strip()
+    plaintext_input = st.text_input("Plaintext (Teks biasa atau Hex)", key="plaintext_avalanche").strip()
+    key_input = st.text_input("Key (Teks biasa atau Hex)", key="key_avalanche").strip()
 
     if st.button("Test Avalanche"):
         try:
@@ -110,9 +110,9 @@ elif menu == "File Operations":
         plaintext_blocks = load_from_file("uploaded.txt")
         st.write(f"Loaded {len(plaintext_blocks)} blocks from file.")
 
-    key_input = st.text_input("Key untuk enkripsi file (Hex 16-bit)", key="key_file").strip()
+    key_input = st.text_input("Key untuk enkripsi file (Teks biasa atau Hex)", key="key_file").strip()
     mode = st.selectbox("Mode Operasi untuk File", ["ECB", "CBC"])
-    iv_input = st.text_input("Initialization Vector untuk CBC (hex)", value="0000", key="iv_file").strip()
+    iv_input = st.text_input("Initialization Vector untuk CBC", value="0000", key="iv_file").strip()
 
     if st.button("Encrypt File"):
         try:
@@ -126,11 +126,19 @@ elif menu == "File Operations":
                 ciphertext_blocks = encrypt_ecb(plaintext_blocks, key)
             else:
                 ciphertext_blocks = encrypt_cbc(plaintext_blocks, key, iv)
-
+            
             save_to_file("ciphertext_output.txt", ciphertext_blocks)
             st.success("Ciphertext file saved as ciphertext_output.txt")
         except Exception as e:
             st.error(f"Error: {e}")
+
+            # Setelah berhasil encrypt file:
+        save_to_file("ciphertext_output.txt", ciphertext_blocks)
+        st.success("Ciphertext file saved as ciphertext_output.txt")
+
+        # Tambah tombol download
+        with open("ciphertext_output.txt", "rb") as f:
+            st.download_button("Download Ciphertext File", f, file_name="ciphertext_output.txt")
 
     if st.button("Decrypt File"):
         try:
@@ -151,6 +159,3 @@ elif menu == "File Operations":
             st.success("Decrypted file saved as decrypted_output.txt")
         except Exception as e:
             st.error(f"Error: {e}")
-
-
-
