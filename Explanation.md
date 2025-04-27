@@ -253,7 +253,7 @@ def avalanche_effect(plaintext, key):
         - Setelah enkripsi berhasil, ciphertext disimpan di st.session_state['ciphertext_blocks'], yang kemudian digunakan untuk dekripsi.
         - Key, IV, dan Mode juga disimpan dalam sesi untuk digunakan kembali jika pengguna ingin mendekripsi pesan yang sudah dienkripsi sebelumnya.
 
-          cuplikan kode :
+  cuplikan kode :
           ```
            st.session_state['ciphertext_blocks'] = ciphertext_blocks
             st.session_state['key'] = key
@@ -278,7 +278,7 @@ def avalanche_effect(plaintext, key):
         - Save to File: Setelah proses enkripsi atau dekripsi, hasilnya disimpan ke dalam file baru yang dapat diunduh oleh pengguna.
      
           cuplikan kode : 
-            ```
+          ```
            save_to_file("ciphertext_output.txt", ciphertext_blocks)
             st.success("Ciphertext file saved as ciphertext_output.txt")
             except Exception as e:
@@ -293,14 +293,15 @@ def avalanche_effect(plaintext, key):
         - CBC: Setiap blok plaintext di-XOR dengan blok ciphertext sebelumnya untuk meningkatkan keamanan.
         - Avalanche Effect: Fungsi ini menguji seberapa besar perbedaan ciphertext saat satu bit dari plaintext diubah. Hal ini mengukur sensitivitas algoritma terhadap perubahan kecil dalam input, yang merupakan sifat penting dari algoritma kriptografi yang baik.
 
-    cuplikan kode : 
-      ```
+    cuplikan kode :
+  ```
       def avalanche_effect(plaintext, key):
         cipher1 = mini_aes_encrypt(plaintext, key)
         cipher2 = mini_aes_encrypt(plaintext ^ (1 << 0), key)  # flip 1 bit
         diff = cipher1 ^ cipher2
         return bin(diff).count('1')
-       ```
+   ```
+  
 ## Pengelolaan File Operations
 
 Program ini menyediakan fitur pengelolaan file untuk memudahkan proses enkripsi dan dekripsi data dalam bentuk file teks (.txt).Data di dalam file berisi daftar blok 16-bit (4 digit hexadecimal) yang akan diproses menggunakan Mini-AES.Proses pengelolaan file mencakup tiga tahap utama yaitu :
