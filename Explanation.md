@@ -63,6 +63,14 @@ Mini-AES 16-bit Encryption adalah implementasi algoritma AES versi mini yang men
     Menggunakan st.session_state untuk menyimpan hasil ciphertext dan konfigurasi enkripsi, sehingga pengguna dapat melanjutkan dekripsi tanpa perlu menginput ulang data.
 
 ## Penjelasan dan Dokumentasi
+Dokumentasi ECB
+![alt text](image-3.png)
+![alt text](image-2.png)
+
+Dokumentasi CBC
+
+Dokumentasi Avalanche Effect Text
+![alt text](image-1.png)
 
 ### SubNibbles
 
