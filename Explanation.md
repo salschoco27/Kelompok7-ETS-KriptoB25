@@ -193,7 +193,7 @@ def avalanche_effect(plaintext, key):
     return bin(diff).count('1')  # hitung berapa bit berubah
 ```
 
-1. Pengembangan Streamlit GUI
+## 1. Pengembangan Streamlit GUI
     - Pustaka yang Digunakan: disini kita menggunakan Streamlit untuk membangun aplikasi web. Streamlit adalah pustaka Python yang memungkinkan pembuatan aplikasi interaktif dengan antarmuka pengguna yang sederhana tanpa memerlukan pengetahuan HTML/CSS.
     - Struktur Dasar GUI:
         - Judul Aplikasi:
@@ -239,7 +239,7 @@ def avalanche_effect(plaintext, key):
             st.error(f"Error: {e}")
           ```
 
-2. Manajemen Antarmuka Pengguna
+## 2. Manajemen Antarmuka Pengguna
     - Pengelolaan Status Sesi:
       - st.session_state digunakan untuk menyimpan status antara enkripsi dan dekripsi. Contoh:
         - Setelah enkripsi berhasil, ciphertext disimpan di st.session_state['ciphertext_blocks'], yang kemudian digunakan untuk dekripsi.
