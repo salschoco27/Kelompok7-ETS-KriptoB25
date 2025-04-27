@@ -100,7 +100,8 @@ Fungsi ini digunakan untuk mengganti nibble setiap byte dalam blok data, untuk m
 
 cuplikan kode : 
 
-```def sub_nibbles(block):
+```
+def sub_nibbles(block):
     return ((SBOX[(block >> 12) & 0xF] << 12) |
             (SBOX[(block >> 8) & 0xF] << 8) |
             (SBOX[(block >> 4) & 0xF] << 4) |
@@ -131,7 +132,7 @@ ShiftRows pada Mini-AES 16-bit hanya menukar nibble tertentu pada blok. Misalnya
 
     Cuplikan kode : 
 
-    ```
+```
     def mix_columns(block):
     n0 = (block >> 12) & 0xF
     n1 = (block >> 8) & 0xF
@@ -144,7 +145,7 @@ ShiftRows pada Mini-AES 16-bit hanya menukar nibble tertentu pada blok. Misalnya
     m3 = gf_mult(n1, 4) ^ gf_mult(n3, 1)
 
     return (m0 << 12) | (m1 << 8) | (m2 << 4) | m3
-    ```
+```
 
     ### AddRoundKey
 
@@ -152,10 +153,10 @@ ShiftRows pada Mini-AES 16-bit hanya menukar nibble tertentu pada blok. Misalnya
 
     Cuplikan kode : 
 
-    ```
+```
     def add_round_key(block, key):
     return block ^ key
-    ```
+```
 
 ### Key Expansion
 
