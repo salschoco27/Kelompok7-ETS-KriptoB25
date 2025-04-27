@@ -172,3 +172,15 @@ def key_expansion(key):
     ]
     return round_keys
 ```
+
+### Avalanche Effect Text
+Avalanche effect adalah efek perubahan besar pada hasil enkripsi hanya karena perubahan kecil pada input (plaintext atau key).
+
+Cuplikan kode :
+```
+def avalanche_effect(plaintext, key):
+    cipher1 = mini_aes_encrypt(plaintext, key)
+    cipher2 = mini_aes_encrypt(plaintext ^ (1 << 0), key)  # flip 1 bit di plaintext
+    diff = cipher1 ^ cipher2
+    return bin(diff).count('1')  # hitung berapa bit berubah
+```
