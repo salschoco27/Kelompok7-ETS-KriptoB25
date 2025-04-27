@@ -96,7 +96,8 @@ cuplikan code dalam `mini_aes.py`
     return ((SBOX[(block >> 12) & 0xF] << 12) |
             (SBOX[(block >> 8) & 0xF] << 8) |
             (SBOX[(block >> 4) & 0xF] << 4) |
-            (SBOX[block & 0xF]))```
+            (SBOX[block & 0xF]))
+```
 
 ### ShiftRows
 
