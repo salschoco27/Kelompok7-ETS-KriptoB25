@@ -254,17 +254,19 @@ def avalanche_effect(plaintext, key):
         - Key, IV, dan Mode juga disimpan dalam sesi untuk digunakan kembali jika pengguna ingin mendekripsi pesan yang sudah dienkripsi sebelumnya.
 
   cuplikan kode :
-          ```
+  
+  ```
            st.session_state['ciphertext_blocks'] = ciphertext_blocks
             st.session_state['key'] = key
             st.session_state['iv'] = iv
             st.session_state['mode'] = mode
-          ```
+  ```
     - Fungsi Konversi:
         - to_hex_if_needed(): Fungsi ini memastikan input yang dimasukkan oleh pengguna dalam bentuk teks (plaintext atau kunci) dikonversi menjadi format hexadecimal yang sesuai.
         - hex_to_text_safe(): Fungsi ini digunakan untuk mengonversi ciphertext kembali menjadi teks, jika hasil dekripsi valid.
      
-          cuplikan kode : 
+          cuplikan kode :
+           
           ```
            plaintext_hex = to_hex_if_needed(plaintext_input)
             key_hex = to_hex_if_needed(key_input)
