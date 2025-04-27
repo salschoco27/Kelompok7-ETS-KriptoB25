@@ -72,6 +72,7 @@ Dokumentasi ECB
 ![alt text](/image/image-2.png)
 
 Dokumentasi CBC
+![alt text](image-3.png)
 
 Dokumentasi Avalanche Effect Text
 ![alt text](/image/image-1.png)
