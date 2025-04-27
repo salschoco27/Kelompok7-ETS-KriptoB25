@@ -12,6 +12,10 @@ Anggota :
 
 Mini-AES 16-bit Encryption adalah implementasi algoritma AES versi mini yang menggunakan kunci dan blok data 16-bit. Program ini menyediakan enkripsi dan dekripsi dalam dua mode operasi: ECB (Electronic Codebook) dan CBC (Cipher Block Chaining). Program ini juga mencakup uji avalanche effect dan operasi file.
 
+*(gambaran prosesnya menggunakan flowchart)*
+
+![alt text](/image/flowchart%20mini-aes.png)
+
 ## Fitur
 
 1. Enkripsi/dekripsi Mini-AES 16-bit (ECB & CBC)
@@ -64,13 +68,13 @@ Mini-AES 16-bit Encryption adalah implementasi algoritma AES versi mini yang men
 
 ## Penjelasan dan Dokumentasi
 Dokumentasi ECB
-![alt text](image-3.png)
-![alt text](image-2.png)
+![alt text](/image/image-3.png)
+![alt text](/image/image-2.png)
 
 Dokumentasi CBC
 
 Dokumentasi Avalanche Effect Text
-![alt text](image-1.png)
+![alt text](/image/image-1.png)
 
 ### SubNibbles
 
@@ -193,7 +197,8 @@ def avalanche_effect(plaintext, key):
     return bin(diff).count('1')  # hitung berapa bit berubah
 ```
 
-## 1. Pengembangan Streamlit GUI
+## Pengembangan Streamlit GUI
+
     - Pustaka yang Digunakan: disini kita menggunakan Streamlit untuk membangun aplikasi web. Streamlit adalah pustaka Python yang memungkinkan pembuatan aplikasi interaktif dengan antarmuka pengguna yang sederhana tanpa memerlukan pengetahuan HTML/CSS.
     - Struktur Dasar GUI:
         - Judul Aplikasi:
@@ -239,7 +244,7 @@ def avalanche_effect(plaintext, key):
             st.error(f"Error: {e}")
           ```
 
-## 2. Manajemen Antarmuka Pengguna
+### Manajemen Antarmuka Pengguna
     - Pengelolaan Status Sesi:
       - st.session_state digunakan untuk menyimpan status antara enkripsi dan dekripsi. Contoh:
         - Setelah enkripsi berhasil, ciphertext disimpan di st.session_state['ciphertext_blocks'], yang kemudian digunakan untuk dekripsi.
@@ -292,3 +297,62 @@ def avalanche_effect(plaintext, key):
         diff = cipher1 ^ cipher2
         return bin(diff).count('1')
        ```
+## Pengelolaan File Operations
+
+Program ini menyediakan fitur pengelolaan file untuk memudahkan proses enkripsi dan dekripsi data dalam bentuk file teks (.txt).Data di dalam file berisi daftar blok 16-bit (4 digit hexadecimal) yang akan diproses menggunakan Mini-AES.Proses pengelolaan file mencakup tiga tahap utama yaitu :
+
+- Upload file untuk dibaca sebagai blok data
+- Enkripsi file menjadi ciphertext
+- Dekripsi file kembali menjadi plaintext
+    
+Berikut rincian tiap tahapannya:
+
+### 1. Upload File
+
+Pengguna mengunggah file .txt berisi data dalam format hexadecimal. File tersebut disimpan sementara di server lokal danakan dibaca menjadi list blok integer untuk diproses lebih lanjut.
+
+*(implementasi kodenya)*
+```
+uploaded_file = st.file_uploader("Upload file (format txt)", type=['txt'])
+
+    if uploaded_file:
+        with open("uploaded.txt", "wb") as f:
+            f.write(uploaded_file.read())
+
+        plaintext_blocks = load_from_file("uploaded.txt")
+```
+
+### 2. Encrypt File
+
+Data blok plaintext yang telah dimuat akan dienkripsi menggunakan mode ECB atau CBC, sesuai pilihan pengguna. Kunci dan inisialisasi vektor dimasukkan dalam bentuk teks atau hexadecimal.
+
+*(implementasi kodenya)*
+```
+if mode == "ECB":
+    ciphertext_blocks = encrypt_ecb(plaintext_blocks, key)
+else:
+    ciphertext_blocks = encrypt_cbc(plaintext_blocks, key, iv)
+
+save_to_file("ciphertext_output.txt", ciphertext_blocks)
+```
+
+Lalu, ciphertext hasil dari enkripsi itu akan disimpan dalam file **ciphertext_output.txt**
+
+### 3. Decrypt File
+
+Ciphertext yang telah dienkripsi dibaca kembali, lalu didekripsi menggunakan mode dan kunci yang sama dan kuntuk hasil dekripsinya akan disimpan ke dalam file **decrypted_output.txt**
+
+*(implementasi kodenya)*
+```
+ciphertext_blocks = load_from_file("ciphertext_output.txt")
+
+if mode == "ECB":
+    decrypted_blocks = decrypt_ecb(ciphertext_blocks, key)
+else:
+    decrypted_blocks = decrypt_cbc(ciphertext_blocks, key, iv)
+
+save_to_file("decrypted_output.txt", decrypted_blocks)
+```
+
+Flowchart untuk operation filenya
+![alt text](/image/flowchart%20operation%20file.png)
