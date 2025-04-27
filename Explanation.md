@@ -364,3 +364,6 @@ save_to_file("decrypted_output.txt", decrypted_blocks)
 *(flowchart untuk operation filenya)*
 
 ![alt text](/image/flowchart%20operation%20file.png)
+
+Dokumentasi :
+![alt text](/image/Ecrypt%20file.png)

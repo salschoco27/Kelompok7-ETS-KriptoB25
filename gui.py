@@ -151,3 +151,6 @@ elif menu == "File Operations":
             st.success("Decrypted file saved as decrypted_output.txt")
         except Exception as e:
             st.error(f"Error: {e}")
+
+
+
